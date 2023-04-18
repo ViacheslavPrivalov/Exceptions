@@ -14,13 +14,15 @@ public class Main {
             if (!(login.length() <= 20)) {
                 throw new WrongLoginException();
             }
-        } else throw new IllegalArgumentException("Логин может содержать в себе только латинские буквы, цифры и знак подчеркивания");
+        } else
+            throw new IllegalArgumentException("Логин может содержать в себе только латинские буквы, цифры и знак подчеркивания");
 
         if (passwordMatcher.matches()) {
             if (!(password.length() < 20)) {
                 System.out.println("Пароль должен быть строго меньше 20 символов.");
             }
-        } else throw new IllegalArgumentException("Пароль может содержать в себе только латинские буквы, цифры и знак подчеркивания");
+        } else
+            throw new IllegalArgumentException("Пароль может содержать в себе только латинские буквы, цифры и знак подчеркивания");
 
         if (!password.equals(confirmPassword)) {
             throw new WrongPasswordException();
