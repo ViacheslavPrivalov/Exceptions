@@ -12,18 +12,18 @@ public class Main {
 
         if (loginMatcher.matches()) {
             if (!(login.length() <= 20)) {
-                throw new WrongLoginException("Логин превышает 20 символов.");
+                throw new WrongLoginException();
             }
-        } else System.out.println("Логин может содержать в себе только латинские буквы, цифры и знак подчеркивания");
+        } else throw new IllegalArgumentException("Логин может содержать в себе только латинские буквы, цифры и знак подчеркивания");
 
         if (passwordMatcher.matches()) {
             if (!(password.length() < 20)) {
                 System.out.println("Пароль должен быть строго меньше 20 символов.");
             }
-        } else System.out.println("Пароль может содержать в себе только латинские буквы, цифры и знак подчеркивания");
+        } else throw new IllegalArgumentException("Пароль может содержать в себе только латинские буквы, цифры и знак подчеркивания");
 
         if (!password.equals(confirmPassword)) {
-            throw new WrongPasswordException("Пароль введен неверно");
+            throw new WrongPasswordException();
         }
         return true;
     }
@@ -43,8 +43,14 @@ public class Main {
 
         try {
             check(login, password, confirmPassword);
-        } catch (WrongLoginException | WrongPasswordException e) {
+        } catch (WrongLoginException e) {
+            System.out.println("Логин превышает 20 символов.");
+        } catch (WrongPasswordException e) {
+            System.out.println("Пароль введен неверно.");
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
+        } finally {
+            System.out.println("Метод завершил работу.");
         }
     }
 }
